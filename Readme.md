@@ -1,2 +1,2 @@
 # Vikram Koti
-# Technical Writer.
+# Technical Writer and aspiring Product owner
