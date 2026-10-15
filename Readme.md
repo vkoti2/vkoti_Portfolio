@@ -15,7 +15,7 @@ Technical Writer with 3.7+ years of dedicated experience creating, revising, and
 
 Skilled in planning documentation scope, interpreting technical requirements, authoring step-by-step user and process guidance, proofreading, and coordinating SME reviews. Experienced with structured and topic-based authoring, content reuse, documentation lifecycle management, and content management systems including Document360 and MadCap Flare. Familiar with Oxygen XML and DITA concepts.
 
-Seeking to apply transferable technical documentation skills to technical manuals, structured documentation, developer documentation, and knowledge management initiatives. 【1-d8493d】
+Seeking to apply transferable technical documentation skills to technical manuals, structured documentation, developer documentation, and knowledge management initiatives. 
 
 ---
 
