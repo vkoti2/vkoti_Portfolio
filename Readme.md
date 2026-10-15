@@ -1,209 +1,177 @@
 # Vikram Koti
 
-**Associate Product Manager | Product Owner | AI Product Management | Healthcare SaaS**
+**Technical Writer | Technical Manuals & Structured Documentation**
 
 📍 Hyderabad, India  
+📞 +91 8897466708 | +91 8074177904  
 📧 vikramkoti.tw@gmail.com  
-📞 +91-8897466708 | +91-8074177904  
 🔗 LinkedIn: https://linkedin.com/in/vikram-koti
 
 ---
 
 ## Professional Summary
 
-Product-focused Healthcare and eClinical SaaS professional with 15+ years of experience across US Healthcare, Pharmacy Benefit Management (PBM), quality analysis, SaaS product collaboration, business analysis, technical communication, and process improvement.
+Technical Writer with 3.7+ years of dedicated experience creating, revising, and maintaining technical documentation for eClinical SaaS products, supported by extensive healthcare operations and quality experience.
 
-Currently building applied Product Management capabilities through an AI Product Management Fellowship. Brings 3.5+ years of eClinical SaaS experience collaborating with Product Strategy, Product Management, Engineering, QA, UX/Design, Business teams, and SMEs on product requirements, user needs, feature discussions, backlog refinement, and release readiness.
+Skilled in planning documentation scope, interpreting technical requirements, authoring step-by-step user and process guidance, proofreading, and coordinating SME reviews. Experienced with structured and topic-based authoring, content reuse, documentation lifecycle management, and content management systems including Document360 and MadCap Flare. Familiar with Oxygen XML and DITA concepts.
 
-Combines healthcare domain expertise, Agile practices, analytical thinking, API knowledge, SaaS workflows, and customer-centric problem solving to support successful product delivery and measurable outcomes.
+Seeking to apply transferable technical documentation skills to technical manuals, structured documentation, developer documentation, and knowledge management initiatives. 【1-d8493d】
 
 ---
 
-## Core Product Management Skills
+## Technical Writing Skills
 
-### Product Discovery
-- User Needs Analysis
-- Pain-Point Identification
-- Personas
-- Jobs-To-Be-Done (JTBD)
-- User Journeys
-- User Flows
-- Problem Statements
+### Technical Documentation & Manuals
 
-### Strategy & Prioritization
-- Product Vision
-- Product Strategy
-- Product Roadmaps
-- RICE Framework
-- MoSCoW Prioritization
-- Kano Analysis
-- Value vs Effort Analysis
-- Opportunity Assessment
+- User Guides
+- Installation Guides
+- Quick Start Guides
+- Troubleshooting Documentation
+- Standard Operating Procedures (SOPs)
+- Process Documentation
+- Release Notes
+- FAQs
+- Knowledge Base Articles
 
-### Metrics & Outcomes
-- North Star Metrics
-- KPIs
-- Adoption Metrics
-- Engagement Metrics
-- Retention Metrics
-- Conversion Metrics
-- Customer Satisfaction
+### Content Development & Quality
 
-### Delivery & Requirements
-- Requirements Gathering
-- Business Analysis
-- User Stories
-- Acceptance Criteria
-- Backlog Refinement
-- Sprint Planning
-- Agile/Scrum
-- UAT Collaboration
+- Documentation Planning
+- Technical Requirements Interpretation
+- Procedural Writing
+- Editing and Proofreading
+- Content Consistency
+- SME Review Coordination
+- Version Control
+- Documentation Maintenance
+- Documentation Standards
 
-### AI Product Management
-- Generative AI
-- Large Language Models (LLMs)
-- Retrieval-Augmented Generation (RAG)
-- Agentic AI
-- Prompt Engineering
-- AI Use Case Evaluation
-- Responsible AI
+### Structured Authoring & CMS
 
-### Tools & Technical
+- Document360
+- MadCap Flare
+- Oxygen XML (Familiarity)
+- DITA Concepts
+- Adobe FrameMaker
+- Adobe RoboHelp
+- Topic-Based Authoring
+- Reusable Content
+- Single-Source Publishing
+
+### Collaboration & Technical Tools
+
 - Jira
 - Confluence
 - Azure DevOps
-- Figma
-- Whimsical
+- Microsoft Word
+- Markdown
+- Git
+- GitHub
 - Microsoft Visio
-- REST APIs
+- REST API Fundamentals
 - JSON
 - XML
-- Postman
-- Swagger/OpenAPI
-- GitHub
-- Microsoft Excel
 
 ---
 
 ## Professional Experience
 
-### AI Product Management Fellowship Intern
-**Product Space**  
-*Sep 2026 - Present*
-
-- Build practical Product Management capability across discovery, research, prioritization, strategy, roadmaps, Agile delivery, and metrics.
-- Apply personas, JTBD, user journeys, user flows, and problem statements to structure user problems.
-- Use prioritization frameworks including RICE, MoSCoW, Kano, and Value vs Effort.
-- Define North Star Metrics and success indicators for product initiatives.
-- Translate business and user needs into features, user stories, and measurable outcomes.
-- Develop expertise in Generative AI, LLMs, RAG, Agentic AI, and AI-enabled product experiences.
-- Evaluate AI use cases based on value, feasibility, privacy, trust, and business impact.
-
----
-
-### Technical Writer | Product Management & Business Analysis Collaboration
+### Technical Writer
 **Endpoint eClinical India Pvt Ltd**  
-*Oct 2022 - Apr 2026 | Hyderabad, India*
+*Hyderabad, India | Oct 2022 – Apr 2026*
 
-- Partnered with Product Strategy, Product Managers, Engineering, QA, UX, Business teams, and SMEs.
-- Contributed to product discovery and requirements discussions.
-- Helped translate stakeholder needs into structured requirements and user-story context.
-- Participated in backlog refinement, sprint planning, standups, retrospectives, and release reviews.
-- Collaborated with UX teams on workflow and usability improvements.
-- Identified requirement gaps, dependencies, ambiguities, and technical constraints.
-- Supported feature validation and release readiness activities.
-- Worked extensively with REST APIs, JSON/XML, Postman, Swagger/OpenAPI, and GitHub.
-- Managed a Document360-based product knowledge platform.
-- Created release documentation, API documentation, process content, and user guidance.
+#### Key Responsibilities
+
+- Authored, updated, and maintained technical user guides, installation guides, quick-start documentation, troubleshooting content, SOPs, and process documentation for multiple SaaS products.
+- Interpreted product requirements and complex workflows by collaborating with Product Management, Engineering, QA, UX, and SMEs to determine documentation scope and develop task-oriented content.
+- Managed the complete documentation lifecycle, including planning, drafting, editing, review coordination, publishing, and maintenance.
+- Built and administered a Document360-based documentation portal, organizing reusable content and knowledge assets.
+- Applied structured authoring principles, DITA/XML concepts, and single-source publishing practices to improve documentation consistency.
+- Prepared release notes and API-related documentation in collaboration with engineering teams using Markdown, JSON, XML, GitHub, and REST API concepts. 【1-d8493d】
 
 ---
 
-### Claims / Quality Analyst & Senior Analyst
+### Claims / Quality Analyst & Senior Analyst – US Healthcare Operations
 **Optum Global Solutions | UnitedHealth Group**  
-*Mar 2013 - Sep 2022 | Hyderabad, India*
+*Mar 2013 – Sep 2022*
 
-- Built deep expertise in US Healthcare, PBM, Medicare, Medicaid, and claims operations.
-- Analyzed complex claims and operational workflows.
-- Performed transaction-level quality analysis and data validation.
-- Applied root-cause analysis, Six Sigma principles, and 5-Whys techniques.
-- Identified automation opportunities and collaborated with development teams.
-- Reduced claim processing time from 10-15 minutes to 3-4 minutes per transaction through automation.
-- Contributed to approximately $30K in monthly operational savings.
-- Collaborated with Operations, Quality, IT, and business stakeholders.
-- Received the Bright Idea Mentor Award for process improvement initiatives.
+#### Key Responsibilities
+
+- Revised and maintained standard operating procedures and operational process documentation related to pharmacy claims workflows.
+- Reviewed documentation and operational outputs for completeness, clarity, consistency, and adherence to quality standards.
+- Performed SOP-based quality analysis and identified opportunities for process improvements.
+- Collaborated with IT and development teams on Excel-based automation initiatives that reduced manual processing time from approximately 10–15 minutes to 3–4 minutes per transaction. 【1-d8493d】
 
 ---
 
-## Domain Expertise
+## Earlier Career
 
-### Healthcare & Clinical Research
-- US Healthcare
-- Pharmacy Benefit Management (PBM)
-- Pharmacy Claims
-- Medicare
-- Medicaid
-- Healthcare SaaS
-- eClinical
-- CTMS
-- EDC
-- RTSM/IRT
-- Clinical Research
+### Healthcare & Life Sciences Roles
+**2007 – 2013**
 
-### Compliance & Regulatory
-- GxP / GMP
-- 21 CFR Part 11
+Organizations:
 
-### Documentation & Knowledge Management
-- Document360
-- MadCap Flare
-- Paligo
-- DITA XML
-- RoboHelp
-- Adobe FrameMaker
-- Markdown
+- ITC Infotech
+- Agappe Diagnostics
+- Thermo Fisher Scientific
 
-### Developer & Technical Documentation
-- REST APIs
-- Swagger/OpenAPI
-- Postman
-- JSON
-- XML
-- GitHub
+Areas of Experience:
+
+- Healthcare IT
+- Diagnostics
+- Laboratory Products
+- Clinical Information
+- Business Processes
+
+【1-d8493d】
 
 ---
 
-## Key Strengths
+## Education
 
-✅ Product Discovery
+### MSc, Molecular Medicine & Cancer Research
+**Brunel University, London**  
+*2010 – 2012*
 
-✅ Business Analysis
+### Master's Degree in Biochemistry
+**Bengaluru University**  
+*2004 – 2006*
 
-✅ Healthcare Domain Expertise
+### Bachelor's Degree in Industrial Microbiology
+**Osmania University, Nizamabad**  
+*2001 – 2004*
 
-✅ AI Product Management
-
-✅ Agile & Scrum
-
-✅ User Story Development
-
-✅ Stakeholder Collaboration
-
-✅ SaaS Product Delivery
-
-✅ API & Technical Documentation
-
-✅ Process Improvement & Automation
+【1-d8493d】
 
 ---
 
-## Career Goal
+## Professional Development
 
-Transition into a Product Management / Product Owner role by combining:
+- UX Writing Fundamentals (2024)
+- API Documentation with JSON & XML (2022)
+- Programming Foundations: APIs & Web Services (2022)
+- Introduction to Web APIs (2022)
 
-- 15+ years of healthcare domain expertise
-- SaaS product collaboration experience
-- Business analysis skills
-- AI product management capabilities
-- User-centric product thinking
+【1-d8493d】
 
-with a focus on building impactful Healthcare SaaS and AI-driven products.
+---
+
+## Core Strengths
+
+- Technical Documentation
+- Structured Authoring
+- SaaS Documentation
+- Knowledge Management
+- Developer Documentation
+- API Documentation
+- Documentation Lifecycle Management
+- SOP Development
+- User-Centric Writing
+- Cross-Functional Collaboration
+- Healthcare Domain Expertise
+- Quality and Compliance Documentation
+
+---
+
+## Technical Keywords
+
+`Technical Writing` • `Document360` • `MadCap Flare` • `DITA` • `Markdown` • `GitHub` • `REST APIs` • `JSON` • `XML` • `Knowledge Base` • `User Guides` • `Release Notes` • `SOPs` • `Single Source Publishing` • `Healthcare SaaS` • `eClinical` • `Documentation Strategy`
