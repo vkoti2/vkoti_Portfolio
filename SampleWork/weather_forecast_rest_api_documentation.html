@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast REST API - Technical Documentation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'JetBrains Mono', monospace; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb { background: #475569; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 antialiased min-h-screen flex flex-col">
+
+    <!-- Mobile Header Bar -->
+    <header class="lg:hidden sticky top-0 z-40 bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700 px-4 py-3 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <button id="mobile-menu-btn" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+            <span class="font-bold text-lg bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Weather API Docs</span>
+        </div>
+        <button id="theme-toggle-mobile" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700">
+            <i class="fa-solid fa-moon dark:hidden"></i>
+            <i class="fa-solid fa-sun hidden dark:inline"></i>
+        </button>
+    </header>
+
+    <div class="flex-1 flex flex-col lg:flex-row max-w-7xl mx-auto w-full">
+        
+        <!-- Sidebar Navigation -->
+        <aside id="sidebar" class="fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-800 border-r border-slate-200 dark:border-slate-700 transform -translate-x-full lg:translate-x-0 transition-transform duration-200 ease-in-out flex flex-col shadow-xl lg:shadow-none lg:sticky lg:top-0 lg:h-screen">
+            <!-- Sidebar Header -->
+            <div class="p-5 border-b border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                <div>
+                    <h1 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-cloud-sun text-blue-500"></i> Open-Meteo
+                    </h1>
+                    <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">REST API v1.0 Reference</span>
+                </div>
+                <button id="theme-toggle-desktop" class="hidden lg:inline-flex p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                    <i class="fa-solid fa-moon dark:hidden"></i>
+                    <i class="fa-solid fa-sun hidden dark:inline"></i>
+                </button>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar text-sm" id="nav-links">
+                <a href="#overview" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-house w-5 text-slate-400"></i> 1. Overview
+                </a>
+                <a href="#purpose" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-bullseye w-5 text-slate-400"></i> 2. Purpose
+                </a>
+                <a href="#scope" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-compass w-5 text-slate-400"></i> 3. Scope
+                </a>
+                <a href="#api-info" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-circle-info w-5 text-slate-400"></i> 4. API Information
+                </a>
+                <a href="#endpoint-reference" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-terminal w-5 text-slate-400"></i> 5. Endpoint Reference
+                </a>
+                <div class="pl-8 space-y-1 my-1 border-l border-slate-200 dark:border-slate-700 ml-4">
+                    <a href="#retrieve-forecast" class="nav-link block py-1.5 px-2 text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">5.1 Retrieve Forecast</a>
+                    <a href="#query-parameters" class="nav-link block py-1.5 px-2 text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">5.2 Query Parameters</a>
+                    <a href="#example-request" class="nav-link block py-1.5 px-2 text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">5.3 Example Request</a>
+                    <a href="#successful-response" class="nav-link block py-1.5 px-2 text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">5.4 Successful Response</a>
+                    <a href="#response-fields" class="nav-link block py-1.5 px-2 text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition">5.5 Field Definitions</a>
+                </div>
+                <a href="#additional-examples" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-code w-5 text-slate-400"></i> 6. Additional Examples
+                </a>
+                <a href="#troubleshooting" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-triangle-exclamation w-5 text-slate-400"></i> 7. Status Codes & Troubleshooting
+                </a>
+                <a href="#postman-testing" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-vial w-5 text-slate-400"></i> 8. Testing with Postman
+                </a>
+                <a href="#limitations" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-shield-halved w-5 text-slate-400"></i> 9. Limitations & Notes
+                </a>
+                <a href="#references" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-book-bookmark w-5 text-slate-400"></i> 10. References
+                </a>
+                <a href="#maintenance" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition">
+                    <i class="fa-solid fa-wrench w-5 text-slate-400"></i> 11. Maintenance
+                </a>
+            </nav>
+
+            <!-- Sidebar Footer -->
+            <div class="p-4 border-t border-slate-200 dark:border-slate-700 text-xs text-slate-500 dark:text-slate-400 flex items-center justify-between">
+                <span>GitHub Pages Ready</span>
+                <button onclick="exportHTML()" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 font-medium">
+                    <i class="fa-solid fa-download"></i> Save HTML
+                </button>
+            </div>
+        </aside>
+
+        <!-- Backdrop for mobile menu -->
+        <div id="sidebar-backdrop" class="fixed inset-0 z-40 bg-slate-900/50 hidden lg:hidden"></div>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 px-4 sm:px-8 py-8 max-w-4xl mx-auto w-full">
+            
+            <!-- Hero / Header Section -->
+            <div class="mb-10 pb-8 border-b border-slate-200 dark:border-slate-700">
+                <div class="flex flex-wrap items-center gap-2 mb-3">
+                    <span class="px-2.5 py-1 text-xs font-semibold bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-full">v1.0</span>
+                    <span class="px-2.5 py-1 text-xs font-semibold bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 rounded-full">REST API Reference</span>
+                    <span class="px-2.5 py-1 text-xs font-semibold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300 rounded-full">Open-Meteo Provider</span>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-3">Weather Forecast REST API</h1>
+                <p class="text-lg text-slate-600 dark:text-slate-300 leading-relaxed">Technical documentation for software developers, testers, and API consumers looking to integrate live and forecast weather data seamlessly.</p>
+                
+                <div class="mt-4 flex flex-wrap items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
+                    <div class="flex items-center gap-1.5"><i class="fa-solid fa-users"></i> Audience: Developers & Testers</div>
+                    <div class="flex items-center gap-1.5"><i class="fa-solid fa-shield-check"></i> Auth: Free / None Required</div>
+                </div>
+            </div>
+
+            <!-- 1. Overview -->
+            <section id="overview" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">1.</span> Overview
+                </h2>
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4 text-slate-600 dark:text-slate-300">
+                    <p>The Open-Meteo Weather Forecast API provides weather forecast data for a specified geographic location. Clients can request current weather conditions, hourly forecasts, and daily forecast summaries by supplying latitude, longitude, and the required weather variables.</p>
+                    <p>The API returns weather data in JSON format, enabling applications to display forecast information, support weather dashboards, and integrate weather data into other services.</p>
+                </div>
+            </section>
+
+            <!-- 2. Purpose -->
+            <section id="purpose" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">2.</span> Purpose
+                </h2>
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-600 dark:text-slate-300">
+                    <p>This document explains how to send requests to the Weather Forecast API, configure query parameters, interpret successful responses, and troubleshoot common request errors.</p>
+                </div>
+            </section>
+
+            <!-- 3. Scope -->
+            <section id="scope" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">3.</span> Scope
+                </h2>
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-3 text-slate-600 dark:text-slate-300">
+                    <p class="font-medium text-slate-900 dark:text-white">This reference covers the following operations:</p>
+                    <ul class="space-y-2 pl-2">
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Retrieve weather forecast data for a geographic location.</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Select current, hourly, and daily weather variables.</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Configure temperature units and the response time zone.</li>
+                        <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-500 mt-1"></i> Interpret response metadata and weather values.</li>
+                    </ul>
+                    <div class="mt-4 p-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50 text-amber-800 dark:text-amber-200 text-sm flex items-start gap-3">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600 dark:text-amber-400 mt-0.5"></i>
+                        <span>This document focuses on the forecast endpoint and does not cover historical weather, air quality, or geocoding endpoints.</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. API Information -->
+            <section id="api-info" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">4.</span> API Information
+                </h2>
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"><td class="p-4 font-semibold text-slate-900 dark:text-white w-1/3">Provider</td><td class="p-4 text-slate-600 dark:text-slate-300">Open-Meteo</td></tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"><td class="p-4 font-semibold text-slate-900 dark:text-white">Base URL</td><td class="p-4 font-mono text-blue-600 dark:text-blue-400">https://api.open-meteo.com</td></tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"><td class="p-4 font-semibold text-slate-900 dark:text-white">Endpoint</td><td class="p-4 font-mono text-slate-600 dark:text-slate-300">/v1/forecast</td></tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"><td class="p-4 font-semibold text-slate-900 dark:text-white">HTTP method</td><td class="p-4"><span class="px-2 py-0.5 text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 rounded">GET</span></td></tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"><td class="p-4 font-semibold text-slate-900 dark:text-white">Authentication</td><td class="p-4 text-slate-600 dark:text-slate-300">Not required for eligible free use</td></tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"><td class="p-4 font-semibold text-slate-900 dark:text-white">Request body</td><td class="p-4 text-slate-600 dark:text-slate-300">None</td></tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"><td class="p-4 font-semibold text-slate-900 dark:text-white">Response format</td><td class="p-4 text-slate-600 dark:text-slate-300">JSON</td></tr>
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition"><td class="p-4 font-semibold text-slate-900 dark:text-white">Transport</td><td class="p-4 text-slate-600 dark:text-slate-300">HTTPS</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Endpoint Reference -->
+            <section id="endpoint-reference" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">5.</span> Endpoint Reference
+                </h2>
+
+                <!-- 5.1 Retrieve Weather Forecast -->
+                <div id="retrieve-forecast" class="mb-8 scroll-mt-20">
+                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">5.1 Retrieve Weather Forecast</h3>
+                    <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2 py-0.5 text-xs font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 rounded">GET</span>
+                            <span class="font-mono text-sm font-semibold text-slate-900 dark:text-white">/v1/forecast</span>
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-300 text-sm">Retrieves weather forecast data for the specified geographic coordinates.</p>
+                        <div>
+                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">Full endpoint URL</span>
+                            <div class="bg-slate-100 dark:bg-slate-900 p-3 rounded-lg font-mono text-xs text-blue-600 dark:text-blue-400 break-all">
+                                https://api.open-meteo.com/v1/forecast
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5.2 Query Parameters -->
+                <div id="query-parameters" class="mb-8 scroll-mt-20">
+                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">5.2 Query Parameters</h3>
+                    <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden mb-3">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead class="bg-slate-50 dark:bg-slate-700/50 text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700">
+                                    <tr>
+                                        <th class="p-3 font-semibold">Parameter</th>
+                                        <th class="p-3 font-semibold">Type</th>
+                                        <th class="p-3 font-semibold">Required</th>
+                                        <th class="p-3 font-semibold">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-slate-600 dark:text-slate-300">
+                                    <tr>
+                                        <td class="p-3 font-mono text-xs text-blue-600 dark:text-blue-400">latitude</td>
+                                        <td class="p-3 text-xs">Number</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300 rounded">Yes</span></td>
+                                        <td class="p-3 text-xs">Latitude of the requested location, in decimal degrees.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-mono text-xs text-blue-600 dark:text-blue-400">longitude</td>
+                                        <td class="p-3 text-xs">Number</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-900/50 dark:text-red-300 rounded">Yes</span></td>
+                                        <td class="p-3 text-xs">Longitude of the requested location, in decimal degrees.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-mono text-xs text-blue-600 dark:text-blue-400">current</td>
+                                        <td class="p-3 text-xs">String</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 text-[10px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 rounded">No</span></td>
+                                        <td class="p-3 text-xs">Comma-separated current weather variables to return.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-mono text-xs text-blue-600 dark:text-blue-400">hourly</td>
+                                        <td class="p-3 text-xs">String</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 text-[10px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 rounded">No</span></td>
+                                        <td class="p-3 text-xs">Comma-separated hourly weather variables to return.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-mono text-xs text-blue-600 dark:text-blue-400">daily</td>
+                                        <td class="p-3 text-xs">String</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 text-[10px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 rounded">No</span></td>
+                                        <td class="p-3 text-xs">Comma-separated daily weather variables to return.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-mono text-xs text-blue-600 dark:text-blue-400">temperature_unit</td>
+                                        <td class="p-3 text-xs">String</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 text-[10px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 rounded">No</span></td>
+                                        <td class="p-3 text-xs">Temperature unit, such as celsius or fahrenheit.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-mono text-xs text-blue-600 dark:text-blue-400">timezone</td>
+                                        <td class="p-3 text-xs">String</td>
+                                        <td class="p-3"><span class="px-2 py-0.5 text-[10px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300 rounded">No</span></td>
+                                        <td class="p-3 text-xs">Time zone used for returned timestamps, such as Asia/Kolkata.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 italic">Note: Parameter names and supported values depend on the provider's current API specification. Refer to the official documentation for the complete list.</p>
+                </div>
+
+                <!-- 5.3 Example Request -->
+                <div id="example-request" class="mb-8 scroll-mt-20">
+                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">5.3 Example Request</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm mb-3">The following request retrieves current temperature, relative humidity, and apparent temperature for Hyderabad.</p>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-800">
+                        <div class="flex items-center justify-between px-4 py-2.5 bg-slate-800/80 border-b border-slate-700 text-xs text-slate-400">
+                            <span class="font-mono">GET Request URL</span>
+                            <button onclick="copyToClipboard(this, 'req-1')" class="hover:text-white transition flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="p-4 overflow-x-auto">
+                            <pre id="req-1" class="text-xs font-mono text-blue-400 whitespace-pre-wrap break-all">GET https://api.open-meteo.com/v1/forecast?latitude=17.3850&longitude=78.4867&current=temperature_2m,relative_humidity_2m,apparent_temperature&timezone=Asia%2FKolkata</pre>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-xs text-slate-500 dark:text-slate-400 flex gap-4">
+                        <span><strong>Headers:</strong> None required</span>
+                        <span><strong>Body:</strong> None</span>
+                    </div>
+                </div>
+
+                <!-- 5.4 Successful Response -->
+                <div id="successful-response" class="mb-8 scroll-mt-20">
+                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">5.4 Successful Response</h3>
+                    <p class="text-slate-600 dark:text-slate-300 text-sm mb-3">HTTP status: <span class="font-semibold text-emerald-600 dark:text-emerald-400">200 OK</span>. Illustrative response showing returned data structure (numeric values are examples).</p>
+                    <div class="bg-slate-900 rounded-xl overflow-hidden shadow-sm border border-slate-800">
+                        <div class="flex items-center justify-between px-4 py-2.5 bg-slate-800/80 border-b border-slate-700 text-xs text-slate-400">
+                            <span class="font-mono">JSON Response</span>
+                            <button onclick="copyToClipboard(this, 'res-1')" class="hover:text-white transition flex items-center gap-1">
+                                <i class="fa-regular fa-copy"></i> Copy
+                            </button>
+                        </div>
+                        <div class="p-4 overflow-x-auto">
+                            <pre id="res-1" class="text-xs font-mono text-emerald-400 leading-relaxed">{
+  "latitude": 17.375,
+  "longitude": 78.5,
+  "timezone": "Asia/Kolkata",
+  "current": {
+    "time": "2026-10-21T11:00",
+    "interval": 900,
+    "temperature_2m": 29.4,
+    "relative_humidity_2m": 58,
+    "apparent_temperature": 31.2
+  },
+  "current_units": {
+    "temperature_2m": "°C",
+    "relative_humidity_2m": "%",
+    "apparent_temperature": "°C"
+  }
+}</pre>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5.5 Response Field Definitions -->
+                <div id="response-fields" class="mb-8 scroll-mt-20">
+                    <h3 class="text-lg font-semibold text-slate-900 dark:text-white mb-2">5.5 Response Field Definitions</h3>
+                    <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden mb-3">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse text-sm">
+                                <thead class="bg-slate-50 dark:bg-slate-700/50 text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700">
+                                    <tr>
+                                        <th class="p-3 font-semibold">Field</th>
+                                        <th class="p-3 font-semibold">Type</th>
+                                        <th class="p-3 font-semibold">Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-slate-600 dark:text-slate-300 text-xs">
+                                    <tr><td class="p-3 font-mono text-blue-600 dark:text-blue-400">latitude</td><td class="p-3">Number</td><td class="p-3">Latitude of the weather grid cell used for the response.</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600 dark:text-blue-400">longitude</td><td class="p-3">Number</td><td class="p-3">Longitude of the weather grid cell used for the response.</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600 dark:text-blue-400">timezone</td><td class="p-3">String</td><td class="p-3">Time zone used to format the returned timestamps.</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600 dark:text-blue-400">current.time</td><td class="p-3">String</td><td class="p-3">Timestamp associated with the current weather data.</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600 dark:text-blue-400">current.interval</td><td class="p-3">Number</td><td class="p-3">Interval between current-condition data updates, in seconds.</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600 dark:text-blue-400">current.temperature_2m</td><td class="p-3">Number</td><td class="p-3">Air temperature at approximately 2 meters above ground.</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600 dark:text-blue-400">current.relative_humidity_2m</td><td class="p-3">Number</td><td class="p-3">Relative humidity at approximately 2 meters above ground (%).</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600 dark:text-blue-400">current.apparent_temperature</td><td class="p-3">Number</td><td class="p-3">Apparent temperature, which represents how the weather feels.</td></tr>
+                                    <tr><td class="p-3 font-mono text-blue-600 dark:text-blue-400">current_units</td><td class="p-3">Object</td><td class="p-3">Units associated with the current weather variables.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 italic">Important: Weather values vary by location and time. The response shown above is a schema example, not a guaranteed result.</p>
+                </div>
+            </section>
+
+            <!-- 6. Additional Request Examples -->
+            <section id="additional-examples" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">6.</span> Additional Request Examples
+                </h2>
+                <div class="space-y-6">
+                    <!-- Example A -->
+                    <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <h3 class="font-semibold text-slate-900 dark:text-white mb-1">Example A: Hourly Temperature Forecast</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mb-3">Returns hourly temperature values and their corresponding timestamps for the requested forecast period.</p>
+                        <div class="bg-slate-900 rounded-lg overflow-hidden border border-slate-800">
+                            <div class="flex items-center justify-between px-3 py-2 bg-slate-800 text-[10px] text-slate-400">
+                                <span class="font-mono">GET URL</span>
+                                <button onclick="copyToClipboard(this, 'ex-a')" class="hover:text-white transition flex items-center gap-1"><i class="fa-regular fa-copy"></i> Copy</button>
+                            </div>
+                            <div class="p-3 overflow-x-auto">
+                                <pre id="ex-a" class="text-xs font-mono text-blue-400 whitespace-pre-wrap break-all">GET https://api.open-meteo.com/v1/forecast?latitude=17.3850&longitude=78.4867&hourly=temperature_2m&forecast_days=1&timezone=Asia%2FKolkata</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Example B -->
+                    <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm">
+                        <h3 class="font-semibold text-slate-900 dark:text-white mb-1">Example B: Daily Forecast</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mb-3">Returns daily minimum and maximum temperatures and the maximum precipitation probability for each forecast day.</p>
+                        <div class="bg-slate-900 rounded-lg overflow-hidden border border-slate-800">
+                            <div class="flex items-center justify-between px-3 py-2 bg-slate-800 text-[10px] text-slate-400">
+                                <span class="font-mono">GET URL</span>
+                                <button onclick="copyToClipboard(this, 'ex-b')" class="hover:text-white transition flex items-center gap-1"><i class="fa-regular fa-copy"></i> Copy</button>
+                            </div>
+                            <div class="p-3 overflow-x-auto">
+                                <pre id="ex-b" class="text-xs font-mono text-blue-400 whitespace-pre-wrap break-all">GET https://api.open-meteo.com/v1/forecast?latitude=17.3850&longitude=78.4867&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=3&timezone=Asia%2FKolkata</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. HTTP Status Codes and Troubleshooting -->
+            <section id="troubleshooting" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">7.</span> HTTP Status Codes and Troubleshooting
+                </h2>
+                <div class="bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden mb-3">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-slate-50 dark:bg-slate-700/50 text-slate-700 dark:text-slate-300 border-b border-slate-200 dark:border-slate-700">
+                                <tr>
+                                    <th class="p-3 font-semibold">Status / Condition</th>
+                                    <th class="p-3 font-semibold">Meaning</th>
+                                    <th class="p-3 font-semibold">Recommended Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-200 dark:divide-slate-700 text-xs text-slate-600 dark:text-slate-300">
+                                <tr>
+                                    <td class="p-3"><span class="px-2 py-0.5 font-bold bg-emerald-100 text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-300 rounded">200 OK</span></td>
+                                    <td class="p-3 font-medium text-slate-900 dark:text-white">Request processed successfully.</td>
+                                    <td class="p-3">Read and validate the JSON response.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><span class="px-2 py-0.5 font-bold bg-amber-100 text-amber-800 dark:bg-amber-900/50 dark:text-amber-300 rounded">400 Bad Request</span></td>
+                                    <td class="p-3 font-medium text-slate-900 dark:text-white">Request parameters are invalid or incomplete.</td>
+                                    <td class="p-3">Check required coordinates, variable names, and parameter values.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><span class="px-2 py-0.5 font-bold bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300 rounded">429 Too Many</span></td>
+                                    <td class="p-3 font-medium text-slate-900 dark:text-white">A rate or usage limit may have been exceeded.</td>
+                                    <td class="p-3">Reduce request frequency and review the provider's usage terms.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3"><span class="px-2 py-0.5 font-bold bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300 rounded">5xx Error</span></td>
+                                    <td class="p-3 font-medium text-slate-900 dark:text-white">Server-side or upstream service error.</td>
+                                    <td class="p-3">Retry cautiously and check the provider's service status.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-500 dark:text-slate-400 italic">The table above is a troubleshooting guide, not a guarantee that every error condition returns the listed status code. Confirm actual error responses using Postman and the provider's current specification.</p>
+            </section>
+
+            <!-- 8. Testing with Postman -->
+            <section id="postman-testing" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">8.</span> Testing with Postman
+                </h2>
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <ol class="space-y-3 text-sm text-slate-600 dark:text-slate-300">
+                        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-xs flex items-center justify-center">1</span> Create a collection named <code class="bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded text-xs">Weather Forecast API</code>.</li>
+                        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-xs flex items-center justify-center">2</span> Create a GET request named <code class="bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded text-xs">Get Current Weather</code>.</li>
+                        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-xs flex items-center justify-center">3</span> Enter the base URL and endpoint.</li>
+                        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-xs flex items-center justify-center">4</span> Add <code class="bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded text-xs">latitude</code>, <code class="bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded text-xs">longitude</code>, <code class="bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded text-xs">current</code>, and <code class="bg-slate-100 dark:bg-slate-900 px-1.5 py-0.5 rounded text-xs">timezone</code> as query parameters.</li>
+                        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-xs flex items-center justify-center">5</span> Send the request.</li>
+                        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-xs flex items-center justify-center">6</span> Verify the HTTP status, JSON response, and returned units.</li>
+                        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-xs flex items-center justify-center">7</span> Save the request and a representative response example.</li>
+                        <li class="flex items-start gap-3"><span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 font-bold text-xs flex items-center justify-center">8</span> Repeat the test with hourly and daily forecast requests.</li>
+                    </ol>
+                </div>
+            </section>
+
+            <!-- 9. Limitations and Usage Notes -->
+            <section id="limitations" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">9.</span> Limitations and Usage Notes
+                </h2>
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-3 text-slate-600 dark:text-slate-300 text-sm">
+                    <ul class="space-y-2.5">
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-info text-blue-500 mt-1"></i> Weather forecasts are estimates and may change as forecast models are updated.</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-info text-blue-500 mt-1"></i> Coordinates identify a geographic location; the returned weather grid cell may not exactly match the requested coordinates.</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-info text-blue-500 mt-1"></i> Timestamps depend on the configured time zone.</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-info text-blue-500 mt-1"></i> Free API access is intended for eligible non-commercial use and is subject to usage limits.</li>
+                        <li class="flex items-start gap-2.5"><i class="fa-solid fa-circle-info text-blue-500 mt-1"></i> Provide appropriate Open-Meteo attribution and comply with the applicable data license and terms.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 10. References -->
+            <section id="references" class="mb-12 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">10.</span> References & Attribution
+                </h2>
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm space-y-4 text-sm text-slate-600 dark:text-slate-300">
+                    <ul class="space-y-2">
+                        <li><a href="https://open-meteo.com/en/docs" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1.5"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Official Forecast API documentation</a></li>
+                        <li><a href="https://open-meteo.com/en/terms" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1.5"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Official Terms of Use</a></li>
+                        <li><a href="https://github.com/open-meteo/open-meteo" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1.5"><i class="fa-solid fa-arrow-up-right-from-square text-xs"></i> Open-Meteo source repository</a></li>
+                    </ul>
+                    <div class="pt-3 border-t border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-500 dark:text-slate-400">
+                        Attribution: Weather data by Open-Meteo.com
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. Document Maintenance -->
+            <section id="maintenance" class="mb-16 scroll-mt-20">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-4 flex items-center gap-2">
+                    <span class="text-blue-600 dark:text-blue-400">11.</span> Document Maintenance
+                </h2>
+                <div class="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm text-slate-600 dark:text-slate-300 text-sm">
+                    <p>Review the provider's API specification periodically to confirm that endpoint parameters, response fields, usage limits, and licensing terms remain accurate.</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-800 border-t border-slate-200 dark:border-slate-700 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+        <p>Weather Forecast REST API Technical Documentation &bull; Version 1.0 &bull; Ready for GitHub Pages (`index.html`)</p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Dark mode toggle logic
+        const htmlElement = document.documentElement;
+        function toggleTheme() {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Check stored theme or prefers-color-scheme
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            htmlElement.classList.add('dark');
+        } else {
+            htmlElement.classList.remove('dark');
+        }
+
+        document.getElementById('theme-toggle-desktop').addEventListener('click', toggleTheme);
+        document.getElementById('theme-toggle-mobile').addEventListener('click', toggleTheme);
+
+        // Mobile Sidebar Toggle
+        const sidebar = document.getElementById('sidebar');
+        const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+
+        function toggleMobileMenu() {
+            sidebar.classList.toggle('-translate-x-full');
+            sidebarBackdrop.classList.toggle('hidden');
+        }
+
+        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        sidebarBackdrop.addEventListener('click', toggleMobileMenu);
+
+        // Close sidebar on link click for mobile
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 1024) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Copy to clipboard helper
+        function copyToClipboard(btn, elementId) {
+            const text = document.getElementById(elementId).innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check text-emerald-400"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Export/Download HTML for GitHub Pages
+        function exportHTML() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'index.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Scrollspy for active sidebar links
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -60% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('bg-blue-50', 'dark:bg-blue-900/30', 'text-blue-600', 'dark:text-blue-400', 'font-semibold');
+                        if (link.getAttribute('href') === `#${id}`) {
+                            link.classList.add('bg-blue-50', 'dark:bg-blue-900/30', 'text-blue-600', 'dark:text-blue-400', 'font-semibold');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section[id], div[id]').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
