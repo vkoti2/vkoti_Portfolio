@@ -6,7 +6,7 @@
     <title>Vikram Koti | Technical Writer Resume</title>
     <meta
       name="description"
-      content="Professional resume for Vikram Koti, Technical Writer specializing in SaaS documentation, structured authoring, and knowledge management."
+      content="Professional resume for Vikram Koti, Technical Writer specializing in healthcare documentation, structured authoring, eClinical SaaS content, and knowledge management."
     />
     <style>
       :root {
@@ -14,13 +14,13 @@
         --navy-2: #1a3d6d;
         --blue: #2e6fd6;
         --blue-soft: #eaf2ff;
-        --accent: #d9b36c;
+        --gold: #d9b36c;
         --text: #1d2430;
         --muted: #58657a;
         --line: #dfe7f4;
         --panel: #ffffff;
         --bg: #f5f8fc;
-        --shadow: 0 20px 45px rgba(17, 35, 61, 0.10);
+        --shadow: 0 18px 42px rgba(17, 35, 61, 0.10);
       }
 
       * { box-sizing: border-box; }
@@ -34,10 +34,7 @@
       }
 
       a { color: inherit; text-decoration: none; }
-      .container {
-        width: min(1160px, calc(100% - 32px));
-        margin: 0 auto;
-      }
+      .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
 
       .site-header {
         position: sticky;
@@ -76,15 +73,14 @@
         transition: background 0.2s ease, color 0.2s ease;
       }
 
-      .main-nav a:hover,
-      .main-nav a.active {
+      .main-nav a:hover, .main-nav a.active {
         background: var(--blue-soft);
         color: var(--navy);
       }
 
       .resume-shell {
-        max-width: 1100px;
-        margin: 38px auto 52px;
+        max-width: 1130px;
+        margin: 38px auto 54px;
         background: var(--panel);
         border: 1px solid var(--line);
         border-radius: 26px;
@@ -108,7 +104,7 @@
 
       h1 {
         margin: 0;
-        font-size: clamp(2.2rem, 4vw, 3.2rem);
+        font-size: clamp(2.2rem, 4vw, 3.3rem);
         letter-spacing: 0.04em;
         font-weight: 700;
       }
@@ -128,7 +124,7 @@
         justify-content: flex-end;
         gap: 12px 18px;
         font-size: 0.92rem;
-        color: rgba(255,255,255,0.9);
+        color: rgba(255,255,255,0.92);
       }
 
       .contact span {
@@ -137,7 +133,7 @@
 
       .content {
         display: grid;
-        grid-template-columns: 310px 1fr;
+        grid-template-columns: 320px 1fr;
       }
 
       .sidebar {
@@ -151,7 +147,7 @@
       }
 
       .section {
-        margin-bottom: 26px;
+        margin-bottom: 28px;
       }
 
       .section-title {
@@ -176,6 +172,13 @@
       .summary-text {
         color: var(--muted);
         line-height: 1.8;
+      }
+
+      .summary-box {
+        background: rgba(255,255,255,0.4);
+        border: 1px solid rgba(17, 43, 77, 0.08);
+        border-radius: 18px;
+        padding: 16px 18px;
       }
 
       .info-list li,
@@ -214,7 +217,7 @@
       .job-title {
         margin: 0;
         color: var(--navy);
-        font-size: 1.2rem;
+        font-size: 1.22rem;
       }
 
       .company {
@@ -224,7 +227,7 @@
       }
 
       .job-date {
-        font-size: 0.86rem;
+        font-size: 0.85rem;
         color: var(--muted);
         font-weight: 700;
         letter-spacing: 0.04em;
@@ -268,13 +271,6 @@
         font-size: 0.92rem;
       }
 
-      .pro-summary {
-        background: rgba(255,255,255,0.45);
-        border: 1px solid rgba(17, 43, 77, 0.08);
-        border-radius: 18px;
-        padding: 16px 18px;
-      }
-
       .site-footer {
         padding: 24px 0 30px;
       }
@@ -288,26 +284,14 @@
       }
 
       @media (max-width: 900px) {
-        .content {
-          grid-template-columns: 1fr;
-        }
-        .sidebar {
-          border-right: 0;
-          border-bottom: 1px solid var(--line);
-        }
-        .contact {
-          justify-content: flex-start;
-        }
+        .content { grid-template-columns: 1fr; }
+        .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+        .contact { justify-content: flex-start; }
       }
 
       @media print {
-        body {
-          background: white;
-        }
-        .site-header,
-        .site-footer {
-          display: none;
-        }
+        body { background: white; }
+        .site-header, .site-footer { display: none; }
         .resume-shell {
           margin: 0;
           border: 0;
@@ -336,13 +320,14 @@
         <div class="topbar-row">
           <div>
             <h1>VIKRAM KOTI</h1>
-            <div class="title">Technical Writer | Technical Manuals & Structured Documentation</div>
+            <div class="title">Technical Writer | Healthcare & Life Sciences Documentation</div>
           </div>
           <div class="contact">
             <span>📍 Hyderabad, India</span>
             <span>📞 +91 8897466708</span>
+            <span>📞 +91 8074177904</span>
             <span>📧 vikramkoti.tw@gmail.com</span>
-            <span>🔗 LinkedIn</span>
+            <span>🔗 linkedin.com/in/vikram-koti</span>
           </div>
         </div>
       </header>
@@ -350,62 +335,62 @@
       <div class="content">
         <aside class="sidebar">
           <section class="section">
-            <h2 class="section-title">Profile</h2>
-            <div class="pro-summary">
+            <h2 class="section-title">Professional Summary</h2>
+            <div class="summary-box">
               <p class="summary-text">
-                Technical Writer with 3.7+ years of dedicated experience creating, revising, and
-                maintaining technical documentation for eClinical SaaS products, supported by strong
-                healthcare operations expertise and a detail-driven approach to content quality.
+                Technical Writer with 8+ years of combined experience across technical writing,
+                healthcare documentation, SOP/process content, product communication, and eClinical
+                SaaS documentation. Experienced in managing the full content lifecycle from planning
+                and requirements interpretation through drafting, review, publishing, and maintenance.
               </p>
             </div>
           </section>
 
           <section class="section">
-            <h2 class="section-title">Core Strengths</h2>
+            <h2 class="section-title">Core Skills</h2>
             <ul class="skill-list">
-              <li>Technical documentation</li>
-              <li>Structured authoring</li>
-              <li>Knowledge management</li>
-              <li>Release notes & FAQs</li>
-              <li>User guides & SOPs</li>
-              <li>SME coordination</li>
-              <li>Documentation lifecycle</li>
-              <li>Process documentation</li>
+              <li>Healthcare & product content</li>
+              <li>User guides and manuals</li>
+              <li>Installation and quick-start guides</li>
+              <li>Troubleshooting documentation</li>
+              <li>SOPs and process documentation</li>
+              <li>Release notes and FAQs</li>
+              <li>API and developer documentation</li>
+              <li>Requirements interpretation</li>
+              <li>SME review coordination</li>
+              <li>Version control and documentation maintenance</li>
             </ul>
           </section>
 
           <section class="section">
-            <h2 class="section-title">Tools & Platforms</h2>
+            <h2 class="section-title">Authoring & Tools</h2>
             <ul class="info-list">
               <li>Document360</li>
               <li>MadCap Flare</li>
               <li>Adobe FrameMaker</li>
-              <li>Adobe RoboHelp</li>
-              <li>DITA and topic-based authoring</li>
-              <li>Markdown</li>
-              <li>Git / GitHub</li>
+              <li>RoboHelp</li>
+              <li>Oxygen XML / DITA concepts</li>
+              <li>Topic-based authoring</li>
+              <li>Reusable content and single-source publishing</li>
               <li>Jira / Confluence</li>
               <li>Azure DevOps</li>
-              <li>REST APIs</li>
-              <li>JSON / XML</li>
+              <li>MS Word / Markdown</li>
+              <li>Git / GitHub</li>
+              <li>Visio / Postman / Swagger</li>
+              <li>REST API / JSON / XML</li>
             </ul>
           </section>
 
           <section class="section">
-            <h2 class="section-title">Education</h2>
-            <ul class="education-list">
-              <li>
-                <strong>MSc, Molecular Medicine & Cancer Research</strong>
-                <span class="small-note">Brunel University, London</span>
-              </li>
-              <li>
-                <strong>Master’s Degree in Biochemistry</strong>
-                <span class="small-note">Bengaluru University</span>
-              </li>
-              <li>
-                <strong>Bachelor’s Degree in Industrial Microbiology</strong>
-                <span class="small-note">Osmania University, Nizamabad</span>
-              </li>
+            <h2 class="section-title">Healthcare Domain</h2>
+            <ul class="info-list">
+              <li>US Healthcare</li>
+              <li>PBM / Pharmacy claims</li>
+              <li>Medicare / Medicaid</li>
+              <li>Clinical information</li>
+              <li>Healthcare SaaS</li>
+              <li>eClinical platform workflows</li>
+              <li>Clinical research context</li>
             </ul>
           </section>
         </aside>
@@ -419,12 +404,14 @@
                 <h3 class="job-title">Technical Writer</h3>
                 <span class="job-date">Oct 2022 – Apr 2026</span>
               </div>
-              <div class="company">Endpoint eClinical India Pvt Ltd</div>
+              <div class="company">Endpoint e-Clinical India Pvt Ltd | Hyderabad, India</div>
               <ul class="job-list">
-                <li>Authored and maintained technical user guides, installation guides, quick-start documentation, troubleshooting content, SOPs, and process documentation for multiple SaaS products.</li>
-                <li>Collaborated with product, engineering, QA, UX, and subject matter experts to translate technical complexity into user-focused documentation.</li>
-                <li>Managed the documentation lifecycle from planning and drafting to review coordination, publishing, and maintenance.</li>
-                <li>Built and administered a Document360-based knowledge management portal for reusable, searchable content organization.</li>
+                <li>Created, updated, and maintained user guides, installation and quick-start guides, troubleshooting instructions, SOPs, process documentation, FAQs, and release information for eClinical SaaS products.</li>
+                <li>Worked with Product, Engineering, QA, UX/Design, Business, and SMEs to interpret requirements, analyze user workflows, clarify edge cases, and define documentation scope.</li>
+                <li>Managed content from planning and drafting through editing, SME review, feedback resolution, publishing, and ongoing maintenance.</li>
+                <li>Built and maintained a Document360-based knowledge platform, organizing topics and reusable content to improve consistency and maintainability.</li>
+                <li>Prepared release notes and API/developer documentation in collaboration with engineering teams, using Markdown, JSON/XML, GitHub, and REST API concepts.</li>
+                <li>Participated in Agile/Scrum discussions, backlog refinement, sprint planning, product reviews, and release-readiness conversations, surfacing requirement gaps and workflow inconsistencies.</li>
               </ul>
             </article>
 
@@ -435,37 +422,50 @@
               </div>
               <div class="company">Optum Global Solutions | UnitedHealth Group</div>
               <ul class="job-list">
-                <li>Revised and maintained SOPs and operational process documentation for pharmacy claims workflows.</li>
-                <li>Reviewed documentation and operational outputs for completeness, clarity, consistency, and quality adherence.</li>
-                <li>Identified process and documentation gaps, contributing to workflow improvement and stronger standardization.</li>
-                <li>Partnered with IT and development teams on spreadsheet and workflow automation initiatives that improved operational efficiency.</li>
+                <li>Built deep domain knowledge across US healthcare and PBM operations, including pharmacy claims, Medicare, Medicaid, patient information, clinical data, and regulated workflows.</li>
+                <li>Revised SOPs and operational process content; reviewed work for clarity, completeness, accuracy, and alignment with business rules and quality standards.</li>
+                <li>Analyzed exceptions, data discrepancies, process gaps, and root causes to support corrective actions and standardized execution.</li>
+                <li>Collaborated with Operations, Quality, and IT/development teams to clarify business rules and improve workflows.</li>
+                <li>Contributed to Excel-based automation that reduced a repetitive claims transaction from approximately 10–15 minutes to 3–4 minutes; associated with estimated savings of significant operational effort.</li>
+                <li>Received a Bright Idea Mentor award for contributions to process improvement and automation initiatives.</li>
               </ul>
             </article>
           </section>
 
           <section class="section">
-            <h2 class="section-title">Specializations</h2>
-            <ul class="chips">
-              <li class="chip">Technical Writing</li>
-              <li class="chip">SaaS Documentation</li>
-              <li class="chip">Structured Authoring</li>
-              <li class="chip">Knowledge Management</li>
-              <li class="chip">Developer Documentation</li>
-              <li class="chip">API Documentation</li>
-              <li class="chip">User Guides</li>
-              <li class="chip">Release Notes</li>
-              <li class="chip">Documentation Standards</li>
-              <li class="chip">SME Review Coordination</li>
-            </ul>
+            <h2 class="section-title">Earlier Career</h2>
+            <p class="summary-text">
+              Technical Writing & Healthcare/Life Sciences Experience | ITC Infotech • Agappe Diagnostics • Thermo Fisher Scientific | 2007–2013
+            </p>
+            <p class="summary-text" style="margin-top: 8px;">
+              Contributed to technical and healthcare/life sciences documentation, process support, and operational content in mission-critical environments.
+            </p>
           </section>
 
           <section class="section">
             <h2 class="section-title">Professional Development</h2>
             <ul class="info-list">
-              <li>UX Writing Fundamentals</li>
-              <li>API Documentation with JSON & XML</li>
-              <li>Programming Foundations: APIs & Web Services</li>
-              <li>Introduction to Web APIs</li>
+              <li>Fellowship Program in AI Product Management (Pursuing - Aug 2026 – Present)</li>
+              <li>UX Writing Fundamentals (2024)</li>
+              <li>API Documentation with JSON & XML (2022)</li>
+              <li>Programming Foundations: APIs & Web Services (2022)</li>
+              <li>Introduction to Web APIs (2022)</li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title">Key Strengths</h2>
+            <ul class="chips">
+              <li class="chip">Technical Writing</li>
+              <li class="chip">Healthcare Documentation</li>
+              <li class="chip">SaaS Documentation</li>
+              <li class="chip">Structured Authoring</li>
+              <li class="chip">Knowledge Management</li>
+              <li class="chip">API Documentation</li>
+              <li class="chip">User Guides</li>
+              <li class="chip">Process Documentation</li>
+              <li class="chip">SME Coordination</li>
+              <li class="chip">Documentation Quality</li>
             </ul>
           </section>
         </main>
