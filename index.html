@@ -118,6 +118,51 @@
       border: 1px solid transparent;
       box-shadow: 0 12px 24px rgba(29, 78, 216, 0.2);
     }
+    .nav-dropdown {
+  position: relative;
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 240px;
+  padding: 12px;
+  background: rgba(255,255,255,0.98);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.08);
+  z-index: 40;
+}
+
+.nav-dropdown:hover .nav-menu,
+.nav-dropdown:focus-within .nav-menu,
+.nav-dropdown.open .nav-menu {
+  display: flex;
+}
+
+.nav-menu a {
+  display: block;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.nav-menu a:hover,
+.nav-menu a:focus-visible {
+  background: rgba(29, 78, 216, 0.08);
+  color: var(--primary-deep);
+}
 
     .menu-toggle {
       display: none;
@@ -990,8 +1035,17 @@
       </button>
 
       <nav class="nav" aria-label="Main navigation">
+        <div class="nav-dropdown">
+          <a href="#" class="nav-link nav-menu-trigger" aria-expanded="false">Selected work</a>
+          <div class="nav-menu">
+            <a href="./SampleWork/UserGuides/index.html">User Guides</a>
+            <a href="./SampleWork/exploring-top-1inch-apis.html">Exploring Top 1inch APIs</a>
+            <a href="./SampleWork/top-10-dogecoin-apis.html">Top 10 Dogecoin APIs</a>
+            <a href="./SampleWork/weather_forecast_rest_api_documentation.html">Weather Forecast REST API Documentation</a>
+          </div>
+        </div>
+      
         <a href="#about">About</a>
-        <a href="#work">Selected work</a>
         <a href="#approach">Approach</a>
         <a href="./resume.html">Resume</a>
         <a href="#contact" class="nav-cta">Let's connect <span aria-hidden="true">↗</span></a>
