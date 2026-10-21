@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exploring Top 1inch APIs | Vikram Koti</title>
+    <meta
+      name="description"
+      content="A recruiter-friendly technical writing case study exploring top 1inch APIs, DeFi aggregation, liquidity, and market data access."
+    />
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --surface: #ffffff;
+        --surface-soft: #edf5ff;
+        --surface-strong: #dfeefb;
+        --border: #dfe6f1;
+        --text: #122033;
+        --muted: #53657d;
+        --primary: #1d4ed8;
+        --primary-deep: #153eaf;
+        --accent: #0ea5e9;
+        --shadow: 0 18px 44px rgba(15, 23, 42, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-wrap {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        font-size: 1.18rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .main-nav {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 24px;
+      }
+
+      .main-nav a {
+        color: var(--muted);
+        font-size: 0.96rem;
+        transition: color 0.2s ease;
+      }
+
+      .main-nav a:hover,
+      .main-nav a.active {
+        color: var(--text);
+      }
+
+      .page-main {
+        background: linear-gradient(180deg, #f7faff 0%, #f1f5fb 100%);
+        padding: 56px 0 72px;
+      }
+
+      .article-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1.7fr) minmax(260px, 0.75fr);
+        gap: 28px;
+        align-items: stretch;
+      }
+
+      .article-header,
+      .article-summary,
+      .article-content,
+      .side-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .article-header {
+        padding: 34px 30px;
+        background: linear-gradient(135deg, rgba(29, 78, 216, 0.05), rgba(14, 165, 233, 0.05));
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.3rem, 4vw, 4rem);
+        line-height: 1.05;
+        letter-spacing: -0.05em;
+      }
+
+      .lead {
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.08rem;
+        max-width: 62ch;
+      }
+
+      .meta-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .meta-badges span {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.9);
+        color: var(--text);
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .article-summary {
+        padding: 26px 22px;
+        background: var(--surface-soft);
+      }
+
+      .article-summary h2 {
+        margin: 0 0 14px;
+        font-size: 1.4rem;
+      }
+
+      .article-summary ul,
+      .article-content ul,
+      .side-card ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      .article-summary li,
+      .article-content li,
+      .side-card li {
+        margin-bottom: 10px;
+        line-height: 1.7;
+      }
+
+      .article-content-wrap {
+        margin-top: 30px;
+      }
+
+      .article-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.7fr) minmax(260px, 0.75fr);
+        gap: 28px;
+        align-items: start;
+      }
+
+      .article-content {
+        padding: 30px 32px;
+      }
+
+      .article-content section + section {
+        margin-top: 30px;
+        padding-top: 28px;
+        border-top: 1px solid var(--border);
+      }
+
+      .article-content h2 {
+        margin: 0 0 14px;
+        font-size: clamp(1.5rem, 2vw, 2rem);
+        line-height: 1.2;
+        letter-spacing: -0.03em;
+      }
+
+      .article-content h3 {
+        margin: 0 0 10px;
+        font-size: 1.12rem;
+      }
+
+      .article-content p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.9;
+      }
+
+      .callout {
+        margin: 22px 0;
+        padding: 18px 20px;
+        background: linear-gradient(135deg, rgba(14, 165, 233, 0.08), rgba(29, 78, 216, 0.04));
+        border-left: 4px solid var(--primary);
+        border-radius: 14px;
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .platform-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .platform-list span {
+        display: inline-flex;
+        align-items: center;
+        padding: 9px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: #f9fbff;
+        color: var(--text);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .code-block {
+        margin: 20px 0 0;
+        padding: 18px 20px;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: #0f172a;
+        color: #e2e8f0;
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.9rem;
+        line-height: 1.7;
+        overflow-x: auto;
+      }
+
+      .article-side-panel {
+        display: grid;
+        gap: 20px;
+      }
+
+      .side-card {
+        padding: 22px 20px;
+      }
+
+      .side-card h3 {
+        margin: 0 0 12px;
+        font-size: 1.08rem;
+      }
+
+      .side-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .site-footer {
+        background: #ffffff;
+        border-top: 1px solid var(--border);
+        padding: 26px 0;
+      }
+
+      .footer-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .site-footer p,
+      .site-footer a {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      @media (max-width: 860px) {
+        .article-shell,
+        .article-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .article-content {
+          padding: 24px 20px;
+        }
+
+        .nav-wrap,
+        .footer-wrap {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 16px 0;
+        }
+
+        .main-nav {
+          gap: 12px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="index.html" class="brand">Vikram Koti</a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="experience.html">Experience</a>
+          <a href="samplework.html" class="active">Sample Work</a>
+          <a href="https://linkedin.com/in/vikram-koti" target="_blank" rel="noreferrer">LinkedIn</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-main article-page">
+      <section class="container article-shell">
+        <header class="article-header">
+          <p class="eyebrow">Case study</p>
+          <h1>Exploring Top 1inch APIs</h1>
+          <p class="lead">
+            A practical look at how 1inch helps developers access routing, liquidity, and market data
+            in the DeFi ecosystem while simplifying complex swap logic for end users.
+          </p>
+          <div class="meta-badges" aria-label="Article metadata">
+            <span>DeFi</span>
+            <span>API</span>
+            <span>Liquidity</span>
+            <span>Market Data</span>
+          </div>
+        </header>
+
+        <aside class="article-summary">
+          <h2>At a glance</h2>
+          <ul>
+            <li>1inch is best known for routing trades across multiple DEXs to find better execution.</li>
+            <li>Its APIs expose quote, swap, token, and liquidity data in a developer-friendly format.</li>
+            <li>For product teams, it reduces integration complexity while improving user trust and pricing.</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section class="container article-content-wrap">
+        <div class="article-layout">
+          <article class="article-content">
+            <section>
+              <h2>Why 1inch matters in DeFi</h2>
+              <p>
+                In decentralized finance, users rarely transact on a single exchange. Liquidity is spread
+                across many protocols, and prices can shift rapidly as each trade is routed. 1inch addresses
+                this challenge by aggregating liquidity from multiple sources and identifying the most
+                efficient execution path for a transaction.
+              </p>
+              <p>
+                For developers, the value is not just better rates. It is also the ability to build more
+                reliable interfaces around asset swaps, token discovery, and market visibility without managing
+                every protocol individually.
+              </p>
+            </section>
+
+            <section>
+              <h2>1inch API categories</h2>
+              <p>
+                1inch offers a few core API surfaces that matter most to teams building financial tools:
+                quote data, swap execution, token metadata, and liquidity insights. Together, these APIs help
+                developers answer two essential questions: what should the user receive, and how should the
+                transaction be executed?
+              </p>
+
+              <ul>
+                <li><strong>Quote API:</strong> estimates the output amount for a trade based on available routes.</li>
+                <li><strong>Swap API:</strong> creates and executes the transaction payload for a trade.</li>
+                <li><strong>Token API:</strong> provides metadata, symbols, and token-level information.</li>
+                <li><strong>Liquidity and market data:</strong> supports comparison, routing, and decision-making.</li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>Quote API: understanding trade value</h2>
+              <p>
+                One of the first steps in a DeFi workflow is calculating the expected outcome of a trade. The
+                quote API helps products estimate how much output a user will receive for a given input amount,
+                taking into account available routes and slippage assumptions.
+              </p>
+              <p>
+                This is especially useful in wallet UIs, portfolio dashboards, and price comparison experiences,
+                where users need fast, trustworthy estimates before confirming a transaction.
+              </p>
+
+              <div class="code-block">
+                curl -X GET "https://api.1inch.io/v5.0/1/quote?fromTokenAddress=0x...&amp;toTokenAddress=0x...&amp;amount=1000000000000000000"
+              </div>
+            </section>
+
+            <section>
+              <h2>Swap API: turning intent into execution</h2>
+              <p>
+                The swap API takes the next step by constructing the transaction details needed to complete the
+                trade. It usually includes route information, slippage settings, and transaction payload parameters
+                that can be passed to a wallet or smart contract interaction.
+              </p>
+              <p>
+                This helps developers standardize a multi-step process: estimate the impact, present the option
+                to the user, validate the transaction, and then execute it with confidence.
+              </p>
+
+              <div class="callout">
+                In practical terms, the swap API turns a fragmented DeFi experience into a cleaner and more
+                predictable user flow.
+              </div>
+            </section>
+
+            <section>
+              <h2>Liquidity and market data access</h2>
+              <p>
+                Beyond the swap itself, 1inch gives teams access to insights that influence product design. For
+                example, liquidity depth, route quality, and token market behavior all influence how a platform
+                presents pricing and risk to users.
+              </p>
+              <p>
+                This matters because a DeFi product is not only a transaction engine; it is also a decision
+                engine. Users want to know whether a route is efficient, whether slippage is reasonable, and how
+                their trade compares to the broader market.
+              </p>
+            </section>
+
+            <section>
+              <h2>Why this matters for product teams</h2>
+              <p>
+                For technical writers, PMs, and product teams, APIs like 1inch are interesting because they turn
+                a complicated market problem into understandable user-facing experiences. Developers need clear
+                documentation, consistent terminology, and reliable examples to explain how routes are selected,
+                how price estimates are derived, and how slippage is handled.
+              </p>
+              <p>
+                A strong technical explanation should help users understand not only what the API does, but why it
+                matters in the broader context of DeFi interoperability and better execution outcomes.
+              </p>
+              <div class="platform-list" aria-label="Platform list">
+                <span>Routing</span>
+                <span>Aggregation</span>
+                <span>Swap execution</span>
+                <span>Liquidity depth</span>
+                <span>Token metadata</span>
+                <span>Trade estimation</span>
+              </div>
+            </section>
+          </article>
+
+          <aside class="article-side-panel">
+            <div class="side-card">
+              <h3>Key takeaways</h3>
+              <ul>
+                <li>1inch helps reduce complexity by aggregating liquidity across providers.</li>
+                <li>Quote and swap APIs help products present clearer pricing and execution paths.</li>
+                <li>User trust improves when the product explains routes, slippage, and market conditions.</li>
+              </ul>
+            </div>
+
+            <div class="side-card">
+              <h3>Common use cases</h3>
+              <ul>
+                <li>Wallet-based token swaps</li>
+                <li>Portfolio dashboards</li>
+                <li>DeFi onboarding flows</li>
+                <li>Market comparison tools</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <p>© 2026 Vikram Koti</p>
+        <a href="https://linkedin.com/in/vikram-koti" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+    </footer>
+  </body>
+</html>
