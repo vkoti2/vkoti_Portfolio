@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vikram Koti | Resume</title>
+    <meta
+      name="description"
+      content="Resume of Vikram Koti, Technical Writer specializing in technical manuals, structured documentation, and knowledge management."
+    />
+    <style>
+      :root {
+        --bg: #f4f7fb;
+        --paper: #ffffff;
+        --paper-2: #f0f5ff;
+        --primary: #162d52;
+        --primary-soft: #244b92;
+        --accent: #3a8dde;
+        --text: #1f2a37;
+        --muted: #5d6b7c;
+        --line: #dfe7f4;
+        --shadow: 0 18px 40px rgba(20, 38, 68, 0.08);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: linear-gradient(180deg, #edf4ff 0%, var(--bg) 100%);
+        color: var(--text);
+        line-height: 1.65;
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 32px auto;
+        background: var(--paper);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        overflow: hidden;
+      }
+
+      .topbar {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-soft) 100%);
+        color: white;
+        padding: 32px 42px 28px;
+      }
+
+      .name-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        align-items: end;
+        flex-wrap: wrap;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.1rem, 3vw, 3rem);
+        letter-spacing: 0.02em;
+      }
+
+      .title {
+        margin-top: 8px;
+        font-size: 1.05rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.8);
+      }
+
+      .contact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px 18px;
+        justify-content: flex-end;
+        font-size: 0.92rem;
+        color: rgba(255,255,255,0.86);
+      }
+
+      .contact span {
+        white-space: nowrap;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+      }
+
+      .sidebar {
+        background: var(--paper-2);
+        border-right: 1px solid var(--line);
+        padding: 28px 26px 30px;
+      }
+
+      .main {
+        padding: 28px 30px 30px;
+      }
+
+      .section {
+        margin-bottom: 26px;
+      }
+
+      .section-title {
+        margin: 0 0 12px;
+        color: var(--primary);
+        font-size: 0.9rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .summary {
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.8;
+        margin: 0;
+      }
+
+      .skill-list,
+      .compact-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .skill-list li,
+      .compact-list li {
+        position: relative;
+        padding-left: 15px;
+        margin: 8px 0;
+        color: var(--text);
+      }
+
+      .skill-list li::before,
+      .compact-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--accent);
+        font-weight: bold;
+      }
+
+      .job {
+        margin-bottom: 20px;
+      }
+
+      .job-header {
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: baseline;
+        margin-bottom: 6px;
+        flex-wrap: wrap;
+      }
+
+      .job-title {
+        margin: 0;
+        font-size: 1.2rem;
+        color: var(--primary);
+      }
+
+      .company {
+        margin: 0 0 8px;
+        font-weight: 700;
+        color: var(--primary-soft);
+      }
+
+      .meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 600;
+      }
+
+      .job ul {
+        margin: 10px 0 0 18px;
+        padding: 0;
+        color: var(--muted);
+      }
+
+      .job li {
+        margin: 6px 0;
+        line-height: 1.7;
+      }
+
+      .chip-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .chip {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .edu-item {
+        margin-bottom: 12px;
+      }
+
+      .edu-item strong {
+        display: block;
+        color: var(--primary);
+      }
+
+      .edu-item span {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 900px) {
+        .content {
+          grid-template-columns: 1fr;
+        }
+
+        .sidebar {
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .contact {
+          justify-content: flex-start;
+        }
+      }
+
+      @media print {
+        body {
+          background: white;
+        }
+
+        .page {
+          margin: 0;
+          border: none;
+          box-shadow: none;
+          border-radius: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar">
+        <div class="name-row">
+          <div>
+            <h1>VIKRAM KOTI</h1>
+            <div class="title">Technical Writer | Technical Manuals & Structured Documentation</div>
+          </div>
+          <div class="contact">
+            <span>📍 Hyderabad, India</span>
+            <span>📞 +91 8897466708</span>
+            <span>📧 vikramkoti.tw@gmail.com</span>
+            <span>🔗 LinkedIn</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <aside class="sidebar">
+          <section class="section">
+            <h2 class="section-title">Profile</h2>
+            <p class="summary">
+              Technical Writer with 3.7+ years of experience creating, revising, and maintaining
+              documentation for eClinical SaaS products. Skilled in planning documentation scope,
+              authoring step-by-step user guidance, proofreading, and managing SME reviews.
+            </p>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title">Core Skills</h2>
+            <ul class="skill-list">
+              <li>Technical documentation</li>
+              <li>Structured authoring</li>
+              <li>User guides & SOPs</li>
+              <li>Release notes & FAQs</li>
+              <li>Knowledge base articles</li>
+              <li>SME review coordination</li>
+              <li>Documentation lifecycle management</li>
+              <li>Process documentation</li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title">Tools</h2>
+            <ul class="compact-list">
+              <li>Document360</li>
+              <li>MadCap Flare</li>
+              <li>Adobe FrameMaker</li>
+              <li>RoboHelp</li>
+              <li>DITA Concepts</li>
+              <li>Markdown</li>
+              <li>Git / GitHub</li>
+              <li>Jira / Confluence</li>
+              <li>Azure DevOps</li>
+              <li>REST APIs</li>
+              <li>JSON / XML</li>
+            </ul>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title">Education</h2>
+            <div class="edu-item">
+              <strong>MSc, Molecular Medicine & Cancer Research</strong>
+              <span>Brunel University, London</span>
+            </div>
+            <div class="edu-item">
+              <strong>Master’s Degree in Biochemistry</strong>
+              <span>Bengaluru University</span>
+            </div>
+            <div class="edu-item">
+              <strong>Bachelor’s Degree in Industrial Microbiology</strong>
+              <span>Osmania University, Nizamabad</span>
+            </div>
+          </section>
+        </aside>
+
+        <main class="main">
+          <section class="section">
+            <h2 class="section-title">Professional Experience</h2>
+
+            <div class="job">
+              <div class="job-header">
+                <h3 class="job-title">Technical Writer</h3>
+                <span class="meta">Oct 2022 – Apr 2026</span>
+              </div>
+              <p class="company">Endpoint eClinical India Pvt Ltd</p>
+              <ul>
+                <li>Authored, updated, and maintained technical user guides, installation guides, quick-start docs, troubleshooting content, SOPs, and process documentation for multiple SaaS products.</li>
+                <li>Collaborated with Product Management, Engineering, QA, UX, and SMEs to interpret requirements and build task-oriented content.</li>
+                <li>Managed the documentation lifecycle, including planning, drafting, editing, review coordination, publishing, and maintenance.</li>
+                <li>Built and administered a Document360-based documentation portal and organized reusable content assets.</li>
+              </ul>
+            </div>
+
+            <div class="job">
+              <div class="job-header">
+                <h3 class="job-title">Claims / Quality Analyst & Senior Analyst</h3>
+                <span class="meta">Mar 2013 – Sep 2022</span>
+              </div>
+              <p class="company">Optum Global Solutions | UnitedHealth Group</p>
+              <ul>
+                <li>Reviewed SOPs and operational process documentation for completeness, clarity, consistency, and quality adherence.</li>
+                <li>Supported process improvement by identifying documentation and workflow gaps and recommending standards-based changes.</li>
+                <li>Worked with IT and development teams on automation initiatives that reduced manual processing time and improved operational efficiency.</li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title">Specializations</h2>
+            <div class="chip-list">
+              <span class="chip">Technical Writing</span>
+              <span class="chip">SaaS Documentation</span>
+              <span class="chip">Structured Authoring</span>
+              <span class="chip">Knowledge Management</span>
+              <span class="chip">Developer Documentation</span>
+              <span class="chip">API Documentation</span>
+              <span class="chip">User Guides</span>
+              <span class="chip">Release Notes</span>
+              <span class="chip">Documentation Standards</span>
+              <span class="chip">SME Coordination</span>
+            </div>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title">Professional Development</h2>
+            <ul class="compact-list">
+              <li>UX Writing Fundamentals</li>
+              <li>API Documentation with JSON & XML</li>
+              <li>Programming Foundations: APIs & Web Services</li>
+              <li>Introduction to Web APIs</li>
+            </ul>
+          </section>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
