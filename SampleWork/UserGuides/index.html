@@ -299,7 +299,6 @@
       <div>
         <h1>User Guides</h1>
       </div>
-      <!-- <a id="openSelectedGuide" class="primary-button" href="#" target="_blank" rel="noopener noreferrer">Open selected guide</a> -->
       <a class="primary-button" href="../../index.html">Home</a>
     </header>
 
@@ -312,7 +311,6 @@
       <section class="viewer-panel" aria-label="PDF viewer section">
         <div class="viewer-header">
           <div class="viewer-title-group">
-            <!-- <span class="badge">PDF Viewer</span> -->
             <h2 id="documentTitle">Select a guide</h2>
           </div>
           <a id="openInNewTab" class="secondary-button" href="#" target="_blank" rel="noopener noreferrer">Open in new tab</a>
@@ -359,7 +357,6 @@
     const viewerFrame = document.getElementById('viewerFrame');
     const documentTitle = document.getElementById('documentTitle');
     const openInNewTab = document.getElementById('openInNewTab');
-    const openSelectedGuide = document.getElementById('openSelectedGuide');
 
     let activeIndex = 0;
 
@@ -381,12 +378,15 @@
     }
 
     function loadGuide(index) {
+      if (!guides[index]) return;
+
       activeIndex = index;
       const guide = guides[index];
 
       documentTitle.textContent = guide.title;
-      openInNewTab.href = guide.file;
-      openSelectedGuide.href = guide.file;
+      if (openInNewTab) {
+        openInNewTab.href = guide.file;
+      }
 
       viewerFrame.innerHTML = `
         <iframe
