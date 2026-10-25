@@ -96,10 +96,31 @@
 
       .topbar-row {
         display: flex;
-        justify-content: space-between;
-        gap: 20px;
-        align-items: end;
-        flex-wrap: wrap;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .profile-photo-wrap {
+        width: 230px;
+        height: 230px;
+        flex-shrink: 0;
+        border-radius: 24px;
+        overflow: hidden;
+        border: 4px solid rgba(255, 255, 255, 0.22);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+      }
+
+      .profile-photo-wrap img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .header-copy {
+        flex: 1;
+        min-width: 0;
       }
 
       h1 {
@@ -121,8 +142,9 @@
       .contact {
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-end;
+        justify-content: flex-start;
         gap: 12px 18px;
+        margin-top: 18px;
         font-size: 0.92rem;
         color: rgba(255,255,255,0.92);
       }
@@ -291,6 +313,8 @@
         .content { grid-template-columns: 1fr; }
         .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
         .contact { justify-content: flex-start; }
+        .topbar-row { flex-direction: column; align-items: flex-start; }
+        .profile-photo-wrap { width: 180px; height: 180px; }
       }
 
       @media print {
@@ -319,16 +343,23 @@
     <main class="resume-shell">
       <header class="topbar">
         <div class="topbar-row">
-          <div>
+          <div class="profile-photo-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80"
+              alt="Vikram Koti portrait"
+            />
+          </div>
+
+          <div class="header-copy">
             <h1>VIKRAM KOTI</h1>
             <div class="title">Technical Writer | Healthcare & Life Sciences Documentation</div>
-          </div>
-          <div class="contact">
-            <span>📍 Hyderabad, India</span>
-            <span>📞 +91 8897466708</span>
-            <span>📞 +91 8074177904</span>
-            <span>📧 vikramkoti.tw@gmail.com</span>
-            <span><a href="https://www.linkedin.com/in/vikram-koti-91bb11150/" target="_blank" rel="noreferrer">🔗 linkedin.com</a></span>
+            <div class="contact">
+              <span>📍 Hyderabad, India</span>
+              <span>📞 +91 8897466708</span>
+              <span>📞 +91 8074177904</span>
+              <span>📧 vikramkoti.tw@gmail.com</span>
+              <span><a href="https://www.linkedin.com/in/vikram-koti-91bb11150/" target="_blank" rel="noreferrer">🔗 linkedin.com</a></span>
+            </div>
           </div>
         </div>
       </header>
@@ -391,7 +422,7 @@
            <section class="section">
             <h2 class="section-title">Professional Summary</h2>
               <p class="summary-text">
-                Technical Writer with 10+ years of experience in technical documentation, healthcare, life sciences, and eClinical SaaS solutions. Skilled in developing user guides, installation and quick-start guides, troubleshooting documentation, release notes, FAQs, API/developer documentation, SOPs, and process documentation. Brings strong domain knowledge in Life Sciences, Clinical Research, Healthcare IT, US healthcare, Pharmacy Benefit Management (PBM), clinical information, and diagnostics. Experienced in requirements analysis, documentation planning, content reviews, SME collaboration, quality assurance, and end-to-end documentation lifecycle management. Adept at translating complex technical and operational workflows into clear, accurate, consistent, and user-focused, scalable documentation for enterprise-level..
+                Technical Writer with 10+ years of experience in technical documentation, healthcare, life sciences, and eClinical SaaS solutions. Skilled in developing user guides, installation and quick-start guides, troubleshooting content, SOPs, release notes, and workflow documentation for regulated healthcare environments.
               </p>
             </section>
           <section class="section">
@@ -405,7 +436,7 @@
               <div class="company">Endpoint e-Clinical India Pvt Ltd | Hyderabad, India</div>
               <ul class="job-list">
                 <li>Owned a dedicated technical documentation platform supporting multiple products that include Elosity, Pulse, Analytics, and EDRS of e-clinical SaaS Products at Endpoint</li>
-                <li>Contributed to the platform's information architecture by recommending a product-based layout, making user guides, release notes, and other technical documentation easier to find</li>
+                <li>Contributed to the platform's information architecture by recommending a product-based layout, making user guides, release notes, and other technical documentation easier to find.</li>
                 <li>Created, updated, and maintained user guides, installation and quick-start guides, troubleshooting instructions, SOPs, process documentation, FAQs, and release information for eClinical SaaS products.</li>
                 <li>Worked with Product, Engineering, QA, UX/Design, Business, and SMEs to interpret requirements, analyze user workflows, clarify edge cases, and define documentation scope.</li>
                 <li>Managed content from planning and drafting through editing, SME review, feedback resolution, publishing, and ongoing maintenance.</li>
@@ -425,7 +456,7 @@
                 <li>Revised SOPs and operational process content; reviewed work for clarity, completeness, accuracy, and alignment with business rules and quality standards.</li>
                 <li>Analyzed exceptions, data discrepancies, process gaps, and root causes to support corrective actions and standardized execution.</li>
                 <li>Collaborated with Operations, Quality, and IT/development teams to clarify business rules and improve workflows.</li>
-                <li>Contributed to Excel-based automation that reduced a repetitive claims transaction from approximately 10–15 minutes to 3–4 minutes; associated with estimated savings of significant operational effort.</li>
+                <li>Contributed to Excel-based automation that reduced a repetitive claims transaction from approximately 10–15 minutes to 3–4 minutes; associated with estimated savings of significant operational time.</li>
                 <li>Received a Bright Idea Mentor award for contributions to process improvement and automation initiatives.</li>
               </ul>
             </article>
@@ -433,17 +464,15 @@
 
           <section class="section">
             <h2 class="section-title">Earlier Career</h2>
-            <p class="summary-text">
             <ul class="earlier-career">
-              <li><b>Associate Writer – Clinical Documentation  ·  ITC Infotech India Pvt Ltd    | Aug 2012 – Feb 2013  </b>><br />
-                Documented clinical data workflows and patient enrollment processes for healthcare plan systems; ensured accuracy and compliance with healthcare IT standards. </li>
-              <li><b>Technical Writer – IVD Products  ·  Agappe Diagnostics India Pvt Ltd          | March 2008 – Oct 2010  </b><br/>
-                Authored user manuals, test protocols, and product lifecycle documentation for in-vitro diagnostic (IVD) instruments; created technical marketing collateral using Adobe InDesign and Illustrator. </li>
-              <li><b>Technical Writer – Laboratory Instruments  ·  Thermo Fisher Scientific Inc. | Jun 2007 – Feb 2008  </b><br />
-                Authored user manuals and test protocols for laboratory instruments, ensuring documentation accuracy and usability across cross-functional scientific product teams — directly relevant to Thermo Fisher's current instrument documentation needs. <br />
+              <li><b>Associate Writer – Clinical Documentation · ITC Infotech India Pvt Ltd | Aug 2012 – Feb 2013</b><br />
+                Documented clinical data workflows and patient enrollment processes for healthcare plan systems; ensured accuracy and compliance with healthcare IT standards.</li>
+              <li><b>Technical Writer – IVD Products · Agappe Diagnostics India Pvt Ltd | March 2008 – Oct 2010</b><br/>
+                Authored user manuals, test protocols, and product lifecycle documentation for in-vitro diagnostic (IVD) instruments; created technical marketing collateral using Adobe InDesign and Illustrator.</li>
+              <li><b>Technical Writer – Laboratory Instruments · Thermo Fisher Scientific Inc. | Jun 2007 – Feb 2008</b><br />
+                Authored user manuals and test protocols for laboratory instruments, ensuring documentation accuracy and usability across cross-functional scientific product teams — directly relevant to regulated healthcare and research environments.
                 Collaborated with product and applications teams to translate complex scientific instrument functionality into clear, audience-appropriate user documentation.</li>
             </ul>
-            </p>
           </section>
 
           <section class="section">
